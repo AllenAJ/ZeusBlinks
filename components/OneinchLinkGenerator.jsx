@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { fetchTokenMetadata } from '../utils/tokenMetadata';
+import { useState } from 'react';
 
 export default function OneinchLinkGenerator({ 
   chainId,
@@ -8,32 +7,15 @@ export default function OneinchLinkGenerator({
   description 
 }) {
   const [outputToken, setOutputToken] = useState('');
-  const [tokenMetadata, setTokenMetadata] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedLink, setGeneratedLink] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (outputToken.length >= 42) { // Basic address length check
-      fetchTokenData();
-    } else {
-      setTokenMetadata(null);
-    }
-  }, [outputToken]);
-
-  const fetchTokenData = async () => {
-    setIsLoading(true);
-    const metadata = await fetchTokenMetadata(chainId, outputToken);
-    setTokenMetadata(metadata);
-    setIsLoading(false);
-  };
 
   const generateLink = () => {
     setIsGenerating(true);
     const timestamp = Date.now();
     
-    // Create the 1inch URL
-    const dexUrl = `https://app.1inch.io/#/${chainId}/simple/swap/${chainId}:${nativeToken}/${chainId}:${outputToken}`;
+    // Create the 1inch URL with symbols instead of addresses
+    const dexUrl = `https://app.1inch.io/#/${chainId}/simple/swap/${chainId}:${nativeToken}/${chainId}:${outputToken.toUpperCase()}`;
     const displayUrl = `https://unfold2024mlinks.vercel.app/dapp/nav1?url=${dexUrl}&t=${timestamp}`;
     const actualUrl = `https://unfold2024mlinks.vercel.app/dapp/nav1?url=${encodeURIComponent(dexUrl)}&t=${timestamp}`;
     
@@ -52,58 +34,79 @@ export default function OneinchLinkGenerator({
       <p className="text-gray-400 mb-6">{description}</p>
       
       <div className="space-y-4">
-        <div className="p-3 bg-gray-800 rounded-lg text-gray-400">
-          Input Token: {nativeToken}
+        <div className="p-4 bg-gray-800 rounded-lg">
+          <p className="text-sm text-gray-400 mb-1">Input Token (Fixed)</p>
+          <div className="text-white font-mono">
+            {nativeToken}
+          </div>
         </div>
         
-        <div className="relative">
+        <div className="space-y-1">
+          <label className="text-sm text-gray-400">Output Token Symbol</label>
           <input
             type="text"
-            placeholder="Output Token Address"
+            placeholder="Enter token symbol (e.g., USDC, USDT)"
             value={outputToken}
             onChange={(e) => setOutputToken(e.target.value)}
-            className="w-full p-3 bg-gray-800 rounded-lg text-white pr-24"
+            className="w-full p-4 bg-gray-800 rounded-lg text-white font-mono
+                     border border-gray-700 focus:border-blue-500 focus:outline-none
+                     transition-colors uppercase"
           />
-          {isLoading && (
-            <span className="absolute right-3 top-3 text-blue-400">Loading...</span>
-          )}
-          {tokenMetadata && (
-            <span className="absolute right-3 top-3 text-green-400">
-              {tokenMetadata.symbol}
-            </span>
-          )}
+          <p className="text-xs text-gray-500 mt-1">
+            Enter the token symbol (e.g., USDC, USDT, DAI)
+          </p>
         </div>
         
         <button
           onClick={generateLink}
-          disabled={isGenerating || !outputToken || isLoading || !tokenMetadata}
-          className="w-full p-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white 
-                   disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          disabled={isGenerating || !outputToken}
+          className="w-full p-4 bg-blue-600 hover:bg-blue-700 rounded-lg text-white 
+                   disabled:opacity-50 disabled:cursor-not-allowed transition-all
+                   font-medium"
         >
-          {isGenerating ? 'Generating...' : 'Generate Mlink'}
+          {isGenerating ? (
+            <span className="flex items-center justify-center">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Generating...
+            </span>
+          ) : (
+            'Generate Blink'
+          )}
         </button>
         
         {generatedLink && (
-          <div className="mt-6 p-4 bg-gray-800 rounded-lg">
-            <p className="text-sm text-gray-400 mb-2">Your Mlink:</p>
-            <code className="text-green-400 break-all">
-              {generatedLink.display}
-            </code>
-            <div className="mt-2 flex gap-2">
-              <a 
-                href={generatedLink.actual} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-sm text-blue-400 hover:text-blue-300"
-              >
-                Open Link ↗
-              </a>
-              <button
-                onClick={() => navigator.clipboard.writeText(generatedLink.actual)}
-                className="text-sm text-blue-400 hover:text-blue-300"
-              >
-                Copy Link 📋
-              </button>
+          <div className="mt-6 p-4 bg-gray-800 rounded-lg space-y-3">
+            <div className="flex justify-between items-center">
+              <p className="text-sm text-gray-400">Your Blink:</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(generatedLink.actual);
+                  }}
+                  className="px-3 py-1 text-sm bg-gray-700 hover:bg-gray-600 
+                           rounded-md text-white transition-colors"
+                >
+                  Copy Link
+                </button>
+                <a 
+                  href={generatedLink.actual}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-500 
+                           rounded-md text-white transition-colors"
+                >
+                  Open Link
+                </a>
+              </div>
+            </div>
+            
+            <div className="p-3 bg-gray-900 rounded-md">
+              <code className="text-green-400 break-all text-sm">
+                {generatedLink.display}
+              </code>
             </div>
           </div>
         )}
