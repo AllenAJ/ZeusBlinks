@@ -27,9 +27,9 @@ export default function DexLinkGenerator({
       dexUrl = `${baseUrl}?${inputParam}=${nativeToken}&${outputParam}=${outputToken}${additionalParams}`;
     }
 
-    const displayUrl = `https://ae88-163-47-210-29.ngrok-free.app/dapp/nav1?url=${dexUrl}&t=${timestamp}`;
+    const displayUrl = `https://unfold2024mlinks.vercel.app/dapp/nav1?url=${dexUrl}&t=${timestamp}`;
     const encodedDexUrl = encodeURIComponent(dexUrl);
-    const actualUrl = `https://ae88-163-47-210-29.ngrok-free.app/dapp/nav1?url=${encodedDexUrl}&t=${timestamp}`;
+    const actualUrl = `https://unfold2024mlinks.vercel.app/dapp/nav1?url=${encodedDexUrl}&t=${timestamp}`;
     
     setTimeout(() => {
       setGeneratedLink({

@@ -23,7 +23,7 @@ export default function RouteGenerator() {
 
   const generateRoute = (url) => {
     if (!timestamp) return '';
-    return `https://ae88-163-47-210-29.ngrok-free.app/dapp/nav1?url=${url}&t=${timestamp}`;
+    return `https://unfold2024mlinks.vercel.app/dapp/nav1?url=${url}&t=${timestamp}`;
   };
 
   if (!timestamp) return null;

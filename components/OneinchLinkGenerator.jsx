@@ -34,8 +34,8 @@ export default function OneinchLinkGenerator({
     
     // Create the 1inch URL
     const dexUrl = `https://app.1inch.io/#/${chainId}/simple/swap/${chainId}:${nativeToken}/${chainId}:${outputToken}`;
-    const displayUrl = `https://ae88-163-47-210-29.ngrok-free.app/dapp/nav1?url=${dexUrl}&t=${timestamp}`;
-    const actualUrl = `https://ae88-163-47-210-29.ngrok-free.app/dapp/nav1?url=${encodeURIComponent(dexUrl)}&t=${timestamp}`;
+    const displayUrl = `https://unfold2024mlinks.vercel.app/dapp/nav1?url=${dexUrl}&t=${timestamp}`;
+    const actualUrl = `https://unfold2024mlinks.vercel.app/dapp/nav1?url=${encodeURIComponent(dexUrl)}&t=${timestamp}`;
     
     setTimeout(() => {
       setGeneratedLink({
