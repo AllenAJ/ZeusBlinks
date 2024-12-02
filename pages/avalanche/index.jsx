@@ -1,13 +1,13 @@
-import OneinchLinkGenerator from '../../components/OneinchLinkGenerator';
+import SwapLinkGenerator from '../../components/SwapLinkGenerator';
 
 export default function AvalanchePage() {
   return (
     <div className="min-h-screen bg-black p-8">
-      <OneinchLinkGenerator
+      <SwapLinkGenerator
         chainId="43114"
         nativeToken="AVAX"
-        title="Avalanche 1inch Mlink Generator"
-        description="Generate a Mlink for 1inch on Avalanche. Enter the token address you want to swap to."
+        title="Avalanche ParaSwap Blink Generator"
+        description="Generate a Blink for ParaSwap on Avalanche. Enter the token address you want to swap to."
       />
     </div>
   );
