@@ -80,12 +80,12 @@ export default function OneinchLinkGenerator({
           className="w-full p-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white 
                    disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
-          {isGenerating ? 'Generating...' : 'Generate Blink'}
+          {isGenerating ? 'Generating...' : 'Generate Mlink'}
         </button>
         
         {generatedLink && (
           <div className="mt-6 p-4 bg-gray-800 rounded-lg">
-            <p className="text-sm text-gray-400 mb-2">Your Blink:</p>
+            <p className="text-sm text-gray-400 mb-2">Your Mlink:</p>
             <code className="text-green-400 break-all">
               {generatedLink.display}
             </code>

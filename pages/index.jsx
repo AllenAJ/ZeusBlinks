@@ -9,39 +9,45 @@ export default function Home() {
     {
       id: 'aptos',
       name: 'Aptos',
-      description: 'Generate Blinks for Cellana Finance',
+      description: 'Generate Mlinks for Aptos',
       gradient: 'from-blue-500 to-purple-500'
     },
     {
       id: 'sui',
       name: 'Sui',
-      description: 'Generate Blinks for Cetus',
+      description: 'Generate Mlinks for Sui',
       gradient: 'from-teal-400 to-blue-500'
     },
     {
       id: 'base',
       name: 'Base',
-      description: 'Generate Blinks for 1inch',
+      description: 'Generate Mlinks for Base',
       gradient: 'from-blue-400 to-indigo-500'
     },
     {
       id: 'unichain',
       name: 'Unichain',
-      description: 'Generate Blinks for Unichain',
+      description: 'Generate Mlinks for Unichain',
       gradient: 'from-pink-500 to-red-500'
     },
     {
       id: 'solana',
       name: 'Solana',
-      description: 'Generate Blinks for Raydium',
+      description: 'Generate Mlinks for Solana',
       gradient: 'from-purple-500 to-indigo-500'
     },
     {
       id: 'agoric',
       name: 'Agoric',
-      description: 'Generate Blinks for Crescent',
+      description: 'Generate Mlinks for Agoric',
       gradient: 'from-purple-400 to-pink-500'
-    }
+    },
+    {
+      id: 'avalanche',
+      name: 'Avalanche',
+      description: 'Generate Mlinks for Avalanche',
+      gradient: 'from-red-500 to-orange-500'
+    },
   ];
 
   const navigateToChain = (chainId) => {
@@ -51,7 +57,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black">
       <Head>
-        <title>Blink Generator</title>
+        <title>Mlink Generator</title>
         <meta name="description" content="Generate Meme Links for various chains" />
       </Head>
 
@@ -59,7 +65,7 @@ export default function Home() {
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold text-white mb-6 bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-            Blink Generator
+            Mlink Generator
           </h1>
           <p className="text-gray-400 text-xl max-w-2xl mx-auto">
             Create memorable meme links for your favorite DeFi protocols across multiple chains
@@ -106,7 +112,7 @@ export default function Home() {
 
         {/* Footer */}
         <div className="mt-20 text-center text-gray-500">
-          <p>Select a chain to generate your Blink</p>
+          <p>Select a chain to generate your Mlink</p>
         </div>
       </div>
     </div>

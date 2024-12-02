@@ -99,14 +99,14 @@ export default function DexLinkGenerator({
               Generating...
             </span>
           ) : (
-            'Generate Blink'
+            'Generate Mlink'
           )}
         </button>
         
         {generatedLink && (
           <div className="mt-6 p-4 bg-gray-800 rounded-lg space-y-3">
             <div className="flex justify-between items-center">
-              <p className="text-sm text-gray-400">Your Blink:</p>
+              <p className="text-sm text-gray-400">Your Mlink:</p>
               <div className="flex gap-2">
                 <button
                   onClick={copyToClipboard}
